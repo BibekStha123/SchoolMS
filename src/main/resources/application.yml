@@ -1,0 +1,10 @@
+server:
+    port: 8090
+spring:
+    application:
+        name: School Management System
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost/cibt_project
+        username: root
+        password: 
