@@ -5,9 +5,9 @@
  */
 package com.cibt.sms.controller;
 
-import com.cibt.sms.core.SiteController;
+import com.cibt.sms.core.CrudController;
+import com.cibt.sms.entity.Enrollment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Bibek
  */
 @Controller
-@RequestMapping(value = "/login")
-public class LoginController extends SiteController {
-
-    @GetMapping()
-    public String index() {
-        return "login/index";
+@RequestMapping(value="/enrollments")
+public class EnrollmentController extends CrudController<Enrollment>{
+    public EnrollmentController(){
+        this.activeMenu="master";
+        this.titleValue="Enrollment";
+        this.redirectURI="enrollments";
+        this.viewPath="enrollments";
     }
 }

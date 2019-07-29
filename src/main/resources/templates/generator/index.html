@@ -1,0 +1,21 @@
+
+<div th:replace="shared/header"></div>
+<!-- form start -->
+<div class="col-md-6">
+    <form role="form" method="POST" th:action="@{'/'+${redirectURI}}">
+      <div class="box-body">
+        <div class="form-group">
+          <label>Entity</label>
+          <select name="entity" class="form-control">
+              <option th:each="f:${files}" th:value="${f}" th:text="${f}">
+                  
+              </option>
+          </select>
+        </div>
+      </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-primary">Generate</button>
+        <a th:href="@{'/'+${redirectURI}}" th:text="Cancel" class="btn btn-danger"></a>
+    </form>
+</div>    
+<div th:replace="shared/footer"></div>
