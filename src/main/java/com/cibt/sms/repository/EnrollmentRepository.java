@@ -6,6 +6,7 @@
 package com.cibt.sms.repository;
 
 import com.cibt.sms.entity.Enrollment;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Bibek
  */
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Integer>{
+    
+//    List<Enrollment> findByStudentId(int studentId);
+//    List<Enrollment> findByYearId(int yearId);
+
     
 }

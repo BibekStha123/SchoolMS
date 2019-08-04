@@ -12,7 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,34 +23,33 @@ import javax.validation.constraints.Size;
  * @author Bibek
  */
 @Entity
-@Table(name = "mst_sections")
-public class Section extends MasterEntity implements Serializable {
+@Table(name = "tbl_guardians")
+public class Guardian extends MasterEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+   
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
-    @Column(name = "code")
-    private String code;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    @Size(min = 1, max = 255)
+    @Column(name = "email")
+    private String email;
 
-    public Section() {
+    public Guardian() {
     }
 
-    public Section(Integer id) {
+    public Guardian(Integer id) {
         this.id = id;
     }
 
-    public Section(Integer id, String name, Date createdAt) {
+    public Guardian(Integer id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.createdAt = createdAt;
+        this.email = email;
     }
 
     public String getName() {
@@ -62,20 +60,12 @@ public class Section extends MasterEntity implements Serializable {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -88,10 +78,10 @@ public class Section extends MasterEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Section)) {
+        if (!(object instanceof Guardian)) {
             return false;
         }
-        Section other = (Section) object;
+        Guardian other = (Guardian) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -100,7 +90,7 @@ public class Section extends MasterEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.cibt.sms.entity.Section[ id=" + id + " ]";
+        return "com.cibt.sms.entity.Guardian[ id=" + id + " ]";
     }
     
 }

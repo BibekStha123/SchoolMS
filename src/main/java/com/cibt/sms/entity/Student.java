@@ -8,6 +8,7 @@ package com.cibt.sms.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,9 +18,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -35,7 +38,12 @@ public class Student extends MasterEntity implements Serializable {
     @Size(max = 50)
     @Column(name = "last_name")
     private String lastName;
-    
+    @Column(name = "dob")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private Date dob;
+    @JoinColumn(name = "guardian_id", referencedColumnName = "id")
+    @ManyToOne
+    private Guardian guardian;
     
     public Student() {
     }
@@ -52,6 +60,10 @@ public class Student extends MasterEntity implements Serializable {
         this.firstName = firstName;
     }
 
+    public String getFullName(){
+        return firstName+" "+lastName;
+    }
+    
     public String getLastName() {
         return lastName;
     }
@@ -59,6 +71,23 @@ public class Student extends MasterEntity implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public Guardian getGuardian() {
+        return guardian;
+    }
+
+    public void setGuardian(Guardian guardian) {
+        this.guardian = guardian;
+    }
+
     
     @Override
     public int hashCode() {

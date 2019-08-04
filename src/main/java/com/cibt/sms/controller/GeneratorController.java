@@ -28,6 +28,7 @@ public class GeneratorController extends SiteController {
 
     private String packagePath = "com/cibt/sms/";
     private String generatorPath = "./src/main/java/" + packagePath;
+    private String viewPath = "./src/main/resources/templates/";
 
     public GeneratorController() {
         this.activeMenu = "master";
@@ -39,7 +40,7 @@ public class GeneratorController extends SiteController {
     public String index(Model model) {
         File file = new File(generatorPath + "entity/");
         model.addAttribute("files", file.list());
-        System.out.println(file.getAbsolutePath());
+//        System.out.println(file.getAbsolutePath());
         return "generator/index";
     }
 
@@ -55,8 +56,9 @@ public class GeneratorController extends SiteController {
             try {
                 String[] fileToken = entity.split("\\.");
                 
-                generateRepository(templatePath, fileToken);
-                generateController(templatePath, fileToken);
+                generateRepository(templatePath, fileToken);//Repository generator
+                generateController(templatePath, fileToken);//Controller generator
+//                generateView(fileToken, templatePath);//View generator
 
             } catch (IOException io) {
                 System.out.println(io.getMessage());
@@ -86,5 +88,16 @@ public class GeneratorController extends SiteController {
         
         FileHelper.write(controllerPath+fileToken[0]+"Controller.java", content);
         System.out.println("Controller Generated");
+    }
+    
+    public void generateView(String[] fileToken, String templatePath)throws IOException{
+        boolean viewTemplate = new File(viewPath+fileToken[0]).mkdir();
+        if(viewTemplate){
+        String content = FileHelper.readToEnd(templatePath+"View.tpl");
+        FileHelper.write(viewPath+fileToken[0]+"/"+"View.html", content);
+        }
+        System.out.println("view generated");
+        
+        //Java Inflector
     }
 }

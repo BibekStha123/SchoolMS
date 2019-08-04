@@ -25,16 +25,21 @@ import javax.persistence.Table;
 public class Enrollment extends MasterEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     @ManyToOne
-    @JoinColumn(name = "student_id")
     private Student student;
     
-    @Column(name = "year_id")
-    private Integer yearId;
-    @Column(name = "class_id")
-    private Integer classId;
-    @Column(name = "section_id")
-    private Integer sectionId;
+    @JoinColumn(name = "year_id", referencedColumnName = "id")
+    @ManyToOne
+    private FiscalYear year;
+    
+    @JoinColumn(name = "class_id", referencedColumnName = "id")
+    @ManyToOne
+    private Grade grade;
+    
+    @JoinColumn(name = "section_id", referencedColumnName = "id")
+    @ManyToOne
+    private Section section;
 
     public Enrollment() {
     }
@@ -51,28 +56,28 @@ public class Enrollment extends MasterEntity implements Serializable {
         this.student = student;
     }
 
-    public Integer getYearId() {
-        return yearId;
+    public FiscalYear getYear() {
+        return year;
     }
 
-    public void setYearId(Integer yearId) {
-        this.yearId = yearId;
+    public void setYear(FiscalYear year) {
+        this.year = year;
     }
 
-    public Integer getClassId() {
-        return classId;
+    public Grade getGrade() {
+        return grade;
     }
 
-    public void setClassId(Integer classId) {
-        this.classId = classId;
+    public void setGrade(Grade grade) {
+        this.grade = grade;
     }
 
-    public Integer getSectionId() {
-        return sectionId;
+    public Section getSection() {
+        return section;
     }
 
-    public void setSectionId(Integer sectionId) {
-        this.sectionId = sectionId;
+    public void setSection(Section section) {
+        this.section = section;
     }
 
     @Override

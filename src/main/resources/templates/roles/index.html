@@ -11,18 +11,12 @@
                   <table class="table table-bordered">
                     <tr>
                       <th>Id</th>
-                      <th>Student</th>
-                      <th>Year</th>
-                      <th>Class</th>
-                      <th>Section</th>
-                      <th>Action</th>
+                      <th>Role</th>
+                      <th style="width: 40px">Action</th>
                     </tr>
                     <tr th:each="record:${records}">
                         <td th:text="${record.id}"></td>
-                        <td th:text="${record.student.getFullName()}"></td>
-                        <td th:text="${record.year.year}"></td>
-                        <td th:text="${record.grade.name}"></td>
-                        <td th:text="${record.section.name}"></td>
+                        <td th:text="${record.name}"></td>
                         <td>
                             <a th:href="@{${redirectURI}+'/edit/'+${record.id}}" class="btn btn-warning btn-xs">
                                 <span class="glyphicon glyphicon-pencil"></span>

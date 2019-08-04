@@ -46,9 +46,14 @@ public class CrudController<T> extends SiteController{
         return viewPath+"/edit";
     }
     
-    @GetMapping(value="delete/{id}")
+    @GetMapping(value="/delete/{id}")
     public String delete(@PathVariable("id") int id){
         repository.deleteById(id);
         return "redirect:/"+redirectURI;
+    }
+    
+    @GetMapping(value="/json")
+    public String getJson(){
+        return null;
     }
 }

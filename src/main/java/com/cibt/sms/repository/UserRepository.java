@@ -5,14 +5,16 @@
  */
 package com.cibt.sms.repository;
 
-import com.cibt.sms.entity.Student;
-import java.util.List;
+import com.cibt.sms.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Bibek
  */
-public interface StudentRepository extends JpaRepository<Student, Integer>{
-    
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer>{
+   
+    User findByUserName(String userName);
 }
